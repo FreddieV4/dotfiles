@@ -1,5 +1,3 @@
-(package-initialize)
-
 ;; packages
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -14,8 +12,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (sqlformat blacken auto-dim-other-buffers dimmer python-black emacsql-psql ob-sql-mode py-isort tide typescript-mode py-yapf flycheck-mypy jupyter flymake pg dockerfile-mode docker docker-cli magit yaml-mode pytest pyenv-mode-auto graphql graphql-mode json-mode ein flycheck-pyflakes projectile jedi))))
+   '(helm-projectile sqlformat auto-dim-other-buffers dimmer python-black emacsql-psql ob-sql-mode py-isort tide typescript-mode py-yapf flycheck-mypy jupyter flymake pg dockerfile-mode docker docker-cli magit yaml-mode pytest pyenv-mode-auto graphql graphql-mode json-mode ein flycheck-pyflakes projectile jedi)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -34,6 +31,8 @@
 
 ;; allow projectile to be run in any project
 (projectile-global-mode)
+
+(dimmer-mode)
 
 ;; show what column we're in at the bottom of our editor
 (setq column-number-mode t)
@@ -60,8 +59,8 @@
 (add-hook 'python-mode-hook 'flycheck-mode)
 (setq flycheck-check-syntax-automatically '(save))
 
-;; have projectile run on this keybinding
-(global-set-key (kbd "C-x p") 'projectile-find-file)
+;; have helm projectile run on this keybinding
+(global-set-key (kbd "C-x p") 'helm-projectile)
 
 ;; json formatter command
 (defun beautify-json ()
@@ -74,3 +73,4 @@
 (global-set-key (kbd "C-x r") 'replace-string)
 (global-set-key (kbd "C-x /") 'comment-region)
 (global-set-key (kbd "C-x \\") 'uncomment-region)
+(global-set-key (kbd "C-x c") 'shell-command-on-region)
